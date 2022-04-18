@@ -1,4 +1,5 @@
-#include "paddle/extension.h"
+//#include "paddle/extension.h"
+#include "paddle/include/experimental/ext_all.h"
 #include "utilities.h"
 #include "coord.h"
 #include "region.h"
@@ -198,11 +199,7 @@ std::vector<paddle::Tensor> PdProdEnvMatAOpCPUForward(
   
   // TODO: This code should be removed once cuda issue fixed.
   const int* natoms = nullptr;
-  if(natoms_tensor.place() != paddle::PlaceType::kCPU){
-      natoms = natoms_tensor.copy_to<int>(paddle::PlaceType::kCPU).data<int>();
-  }else{
-      natoms = natoms_tensor.data<int>();
-  }
+  natoms = natoms_tensor.data<int>();
 
   int nloc = natoms[0];
   int nall = natoms[1];
@@ -257,40 +254,22 @@ std::vector<paddle::Tensor> PdProdEnvMatAOpCPUForward(
   paddle::Tensor rij_tensor = paddle::Tensor(paddle::PlaceType::kCPU, rij_shape);
   paddle::Tensor nlist_tensor = paddle::Tensor(paddle::PlaceType::kCPU, nlist_shape);
   
-  if(natoms_tensor.place() == paddle::PlaceType::kCPU) {
-      PD_DISPATCH_FLOATING_TYPES(
-          coord_tensor.type(), "pd_prod_env_mat_a_cpu_forward_kernel", ([&] {
-            PdProdEnvMatAOpCPUForwardKernel<data_t>(
-                nsamples, nloc, ndescrpt, nnei, nall, mem_cpy, mem_nnei, max_nbor_size,
-                mesh_tensor.data<int>(), nei_mode, rcut_a, rcut_r, rcut_r_smth, max_cpy_trial, max_nnei_trial, b_nlist_map, sec_a, sec_r,
-                descrpt_tensor.mutable_data<data_t>(),
-                descrpt_deriv_tensor.mutable_data<data_t>(),
-                rij_tensor.mutable_data<data_t>(),
-                nlist_tensor.mutable_data<int>(),
-                coord_tensor.data<data_t>(),
-                box_tensor.data<data_t>(),
-                avg_tensor.data<data_t>(),
-                std_tensor.data<data_t>(),
-                type_tensor.data<int>());
-          }));
-  } else {
-      PD_DISPATCH_FLOATING_TYPES(
-          coord_tensor.type(), "pd_prod_env_mat_a_cpu_forward_kernel", ([&] {
-            PdProdEnvMatAOpCPUForwardKernel<data_t>(
-                nsamples, nloc, ndescrpt, nnei, nall, mem_cpy, mem_nnei, max_nbor_size,
-                mesh_tensor.size() == 0 ? mesh_tensor.data<int>() : mesh_tensor.copy_to<int>(paddle::PlaceType::kCPU).data<int>(), 
-                nei_mode, rcut_a, rcut_r, rcut_r_smth, max_cpy_trial, max_nnei_trial, b_nlist_map, sec_a, sec_r,
-                descrpt_tensor.mutable_data<data_t>(),
-                descrpt_deriv_tensor.mutable_data<data_t>(),
-                rij_tensor.mutable_data<data_t>(),
-                nlist_tensor.mutable_data<int>(),
-                coord_tensor.copy_to<data_t>(paddle::PlaceType::kCPU).data<data_t>(),
-                box_tensor.copy_to<data_t>(paddle::PlaceType::kCPU).data<data_t>(),
-                avg_tensor.copy_to<data_t>(paddle::PlaceType::kCPU).data<data_t>(),
-                std_tensor.copy_to<data_t>(paddle::PlaceType::kCPU).data<data_t>(),
-                type_tensor.copy_to<int>(paddle::PlaceType::kCPU).data<int>());
-          }));
-  }
+  PD_DISPATCH_FLOATING_TYPES(
+      coord_tensor.type(), "pd_prod_env_mat_a_cpu_forward_kernel", ([&] {
+        PdProdEnvMatAOpCPUForwardKernel<data_t>(
+            nsamples, nloc, ndescrpt, nnei, nall, mem_cpy, mem_nnei, max_nbor_size,
+            mesh_tensor.data<int>(), nei_mode, rcut_a, rcut_r, rcut_r_smth, max_cpy_trial, max_nnei_trial, b_nlist_map, sec_a, sec_r,
+            descrpt_tensor.mutable_data<data_t>(),
+            descrpt_deriv_tensor.mutable_data<data_t>(),
+            rij_tensor.mutable_data<data_t>(),
+            nlist_tensor.mutable_data<int>(),
+            coord_tensor.data<data_t>(),
+            box_tensor.data<data_t>(),
+            avg_tensor.data<data_t>(),
+            std_tensor.data<data_t>(),
+            type_tensor.data<int>());
+      }));
+  
       
   return {descrpt_tensor, descrpt_deriv_tensor, rij_tensor, nlist_tensor};
 }
