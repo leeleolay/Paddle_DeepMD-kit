@@ -10,8 +10,17 @@ This repo is based on the PaddlePaddle deep learning framework including trainin
 - Support se_a desciptor model
 
 # 3.Compiling&Building&Installation
+- prepare docker and python environment
+```
+docker pull paddlepaddle/paddle:latest-dev-cuda11.0-cudnn8-gcc82 
+docker run -it --name {name} -v 绝对路径开发目录:绝对路径开发目录 -v /root/.cache:/root/.cache -v /root/.ccache:/root/.ccache {image_id} bash 
+rm -f /usr/bin/python3
+ln -s /usr/bin/python3.8 /usr/bin/python3
+```
+
 - compile_paddle.sh  
 ```
+git clone https://github.com/PaddlePaddle/Paddle.git
 cd Paddle  
 git reset --hard eca6638c599591c69fe40aa196f5fd42db7efbe2  
 rm -rf build && mkdir build && cd build  
@@ -23,7 +32,7 @@ make -j 32 inference_lib_dist
 ```
 rm -rf /home/deepmdroot/ && mkdir /home/deepmdroot && deepmd_root=/home/deepmdroot
 cd /home/deepmd-kit/source && rm -rf build && mkdir build && cd build
-cmake -DTENSORFLOW_ROOT=$tensorflow_root -DCMAKE_INSTALL_PREFIX=$deepmd_root -DPADDLE_ROOT=$paddle_root -DUSE_CUDA_TOOLKIT=FALSE -DFLOAT_PREC=low ..
+cmake -DCMAKE_INSTALL_PREFIX=$deepmd_root -DPADDLE_ROOT=$paddle_root -DUSE_CUDA_TOOLKIT=FALSE -DFLOAT_PREC=low ..
 make -j 4 && make install
 make lammps
 ```
@@ -31,6 +40,7 @@ make lammps
 ```
 #apt install libc-dev
 cd /home
+wget https://github.com/lammps/lammps/archive/stable_29Oct2020.tar.gz
 rm -rf lammps-stable_29Oct2020/
 tar -xzvf stable_29Oct2020.tar.gz
 cd lammps-stable_29Oct2020/src/
@@ -43,7 +53,14 @@ make mpi -j 20
 # 4.Performance
 - The performance of inference based on the LAMMPS with PaddlePaddle framework，comparing with TensorFlow framework, about single core and multi-threads
 ![截屏2022-05-25 23 08 11](https://user-images.githubusercontent.com/50223303/170295703-32e18058-aff9-4368-93cd-38a1ed787e8a.png)
-  
+- single thread performance
+```
+TF_INTRA_OP_PARALLELISM_THREADS=8 TF_INTER_OP_PARALLELISM_THREADS=1 numactl -c 0 -m 0 lmp_serial -in in.lammps
+```
+- multithreads performance
+```
+OMP_NUM_THREADS=1 TF_INTRA_OP_PARALLELISM_THREADS=1 TF_INTER_OP_PARALLELISM_THREADS=1  mpirun --allow-run-as-root -np 4 lmp_mpi -in in.lammps
+```  
 # 5.Future Plans
 - fix training precision
 - support Gromacs
