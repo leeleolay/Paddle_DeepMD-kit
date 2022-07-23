@@ -42,6 +42,13 @@ make lammps
 ```
 - compile_lammps.sh  
 ```
+cd /home
+wget https://download.open-mpi.org/release/open-mpi/v4.0/openmpi-4.0.7.tar.gz
+tar xf openmpi-4.0.7.tar.gz
+cd openmpi-4.0.7
+./configure
+make all install
+add bashrc: export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
 #apt install libc-dev
 cd /home
 wget https://github.com/lammps/lammps/archive/stable_29Oct2020.tar.gz
