@@ -30,8 +30,9 @@ make -j 32 inference_lib_dist
 ```
 - compile_deepmd.sh  
 ```
+git clone https://github.com/X4Science/paddle-deepmd.git
 rm -rf /home/deepmdroot/ && mkdir /home/deepmdroot && deepmd_root=/home/deepmdroot
-cd /home/deepmd-kit/source && rm -rf build && mkdir build && cd build
+cd /home/paddle-deepmd/source && rm -rf build && mkdir build && cd build
 cmake -DCMAKE_INSTALL_PREFIX=$deepmd_root -DPADDLE_ROOT=$paddle_root -DUSE_CUDA_TOOLKIT=FALSE -DFLOAT_PREC=low ..
 make -j 4 && make install
 make lammps
