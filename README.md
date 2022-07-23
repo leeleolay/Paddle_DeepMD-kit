@@ -16,6 +16,8 @@ docker pull paddlepaddle/paddle:latest-dev-cuda11.0-cudnn8-gcc82
 docker run -it --name {name} -v 绝对路径开发目录:绝对路径开发目录 -v /root/.cache:/root/.cache -v /root/.ccache:/root/.ccache {image_id} bash 
 rm -f /usr/bin/python3
 ln -s /usr/bin/python3.8 /usr/bin/python3
+wget https://github.com/Kitware/CMake/releases/download/v3.21.0/cmake-3.21.0-linux-x86_64.tar.gz && tar -xf cmake-3.21.0-linux-x86_64.tar.gz
+add ~/.bashrc：export PATH=/home/cmake-3.21.0-linux-x86_64/bin:$PATH
 ```
 
 - compile_paddle.sh  
