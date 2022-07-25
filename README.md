@@ -29,14 +29,14 @@ rm -rf build && mkdir build && cd build
 cmake .. -DPY_VERSION=3.8 -DPYTHON_INCLUDE_DIR=$(python3 -c "from distutils.sysconfig import get_python_inc; print(get_python_inc())") -DPYTHON_LIBRARY=$(python3 -c "import distutils.sysconfig as sysconfig; print(sysconfig.get_config_var('LIBDIR'))") -DWITH_GPU=OFF -DWITH_AVX=ON -DON_INFER=ON -DCMAKE_BUILD_TYPE=Release  
 make -j 32  
 make -j 32 inference_lib_dist  
-paddle_root=/home/Paddle/build/paddle_inference_install_dir
+PADDLE_ROOT=/home/Paddle/build/paddle_inference_install_dir(or add in bashrc with export)
 ```
 - compile_deepmd.sh  
 ```
 git clone https://github.com/X4Science/paddle-deepmd.git
-rm -rf /home/deepmdroot/ && mkdir /home/deepmdroot && deepmd_root=/home/deepmdroot
+rm -rf /home/deepmdroot/ && mkdir /home/deepmdroot && DEEPMD_ROOT=/home/deepmdroot(or add in bashrc with export)
 cd /home/paddle-deepmd/source && rm -rf build && mkdir build && cd build
-cmake -DCMAKE_INSTALL_PREFIX=$deepmd_root -DPADDLE_ROOT=$paddle_root -DUSE_CUDA_TOOLKIT=FALSE -DFLOAT_PREC=low ..
+cmake -DCMAKE_INSTALL_PREFIX=$DEEPMD_ROOT -DPADDLE_ROOT=$paddle_root -DUSE_CUDA_TOOLKIT=FALSE -DFLOAT_PREC=low ..
 make -j 4 && make install
 make lammps
 ```
