@@ -20,7 +20,19 @@ wget https://github.com/Kitware/CMake/releases/download/v3.21.0/cmake-3.21.0-lin
 add ~/.bashrc：export PATH=/home/cmake-3.21.0-linux-x86_64/bin:$PATH
 ```
 
-- compile_paddle.sh --training part 
+- compile_Paddle.sh
+```
+git clone https://github.com/PaddlePaddle/Paddle.git
+cd Paddle  
+git reset --hard eca6638c599591c69fe40aa196f5fd42db7efbe2  
+rm -rf build && mkdir build && cd build  
+cmake .. -DPY_VERSION=3.8 -DPYTHON_INCLUDE_DIR=$(python3 -c "from distutils.sysconfig import get_python_inc; print(get_python_inc())") -DPYTHON_LIBRARY=$(python3 -c "import distutils.sysconfig as sysconfig; print(sysconfig.get_config_var('LIBDIR'))") -DWITH_GPU=OFF -DWITH_AVX=ON -DON_INFER=ON -DCMAKE_BUILD_TYPE=Release  
+make -j 32  
+make -j 32 inference_lib_dist  
+python3 -m pip install python/dist/paddlepaddle-0.0.0-cp38-cp38-linux_x86_64.whl --no-cache-dir
+PADDLE_ROOT=/home/Paddle/build/paddle_inference_install_dir(or add in bashrc with export)
+```
+- compile_Paddle_DeepMD-kit.sh --training part 
 ```
 python3 -m pip install tensorflow-gpu==2.5.0
 python3 -m pip install scikit-build
@@ -33,19 +45,7 @@ source ~/.bashrc
 cd deepmd && python3 load_paddle_op.py install
 ```
 
-- compile_paddle.sh --inference part 
-```
-git clone https://github.com/PaddlePaddle/Paddle.git
-cd Paddle  
-git reset --hard eca6638c599591c69fe40aa196f5fd42db7efbe2  
-rm -rf build && mkdir build && cd build  
-cmake .. -DPY_VERSION=3.8 -DPYTHON_INCLUDE_DIR=$(python3 -c "from distutils.sysconfig import get_python_inc; print(get_python_inc())") -DPYTHON_LIBRARY=$(python3 -c "import distutils.sysconfig as sysconfig; print(sysconfig.get_config_var('LIBDIR'))") -DWITH_GPU=OFF -DWITH_AVX=ON -DON_INFER=ON -DCMAKE_BUILD_TYPE=Release  
-make -j 32  
-make -j 32 inference_lib_dist  
-python3 -m pip install python/dist/paddlepaddle-0.0.0-cp38-cp38-linux_x86_64.whl --no-cache-dir
-PADDLE_ROOT=/home/Paddle/build/paddle_inference_install_dir(or add in bashrc with export)
-```
-- compile_deepmd.sh  
+- compile_Paddle_DeepMD-kit.sh --inference part 
 ```
 git clone https://github.com/X4Science/paddle-deepmd.git
 rm -rf /home/deepmdroot/ && mkdir /home/deepmdroot && DEEPMD_ROOT=/home/deepmdroot(or add in bashrc with export)
@@ -54,7 +54,7 @@ cmake -DCMAKE_INSTALL_PREFIX=$DEEPMD_ROOT -DPADDLE_ROOT=$paddle_root -DUSE_CUDA_
 make -j 4 && make install
 make lammps
 ```
-- compile_lammps.sh  
+- compile_LAMMPS.sh  
 ```
 cd /home
 wget https://download.open-mpi.org/release/open-mpi/v4.0/openmpi-4.0.7.tar.gz
