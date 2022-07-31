@@ -29,6 +29,7 @@ rm -rf build && mkdir build && cd build
 cmake .. -DPY_VERSION=3.8 -DPYTHON_INCLUDE_DIR=$(python3 -c "from distutils.sysconfig import get_python_inc; print(get_python_inc())") -DPYTHON_LIBRARY=$(python3 -c "import distutils.sysconfig as sysconfig; print(sysconfig.get_config_var('LIBDIR'))") -DWITH_GPU=OFF -DWITH_AVX=ON -DON_INFER=ON -DCMAKE_BUILD_TYPE=Release  
 make -j 32  
 make -j 32 inference_lib_dist  
+python3 -m pip install python/dist/paddlepaddle-0.0.0-cp38-cp38-linux_x86_64.whl --no-cache-dir
 PADDLE_ROOT=/home/Paddle/build/paddle_inference_install_dir(or add in bashrc with export)
 ```
 - compile_deepmd.sh  
