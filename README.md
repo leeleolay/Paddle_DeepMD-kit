@@ -20,8 +20,10 @@ wget https://github.com/Kitware/CMake/releases/download/v3.21.0/cmake-3.21.0-lin
 add ~/.bashrc：export PATH=/home/cmake-3.21.0-linux-x86_64/bin:$PATH
 ```
 
-- compile_paddle.sh --inference part 
+- compile_paddle.sh --training part 
 ```
+python3 -m pip install tensorflow-gpu==2.5.0
+python3 -m pip install scikit-build
 python3 setup.py install
 find the package name of deepmd-kit in the location of installation and add in bashrc
         export LD_LIBRARY_PATH=/usr/local/lib/python3.8/dist-packages/**{deepmd_name}**/deepmd/op:$LD_LIBRARY_PATH
