@@ -20,7 +20,12 @@ wget https://github.com/Kitware/CMake/releases/download/v3.21.0/cmake-3.21.0-lin
 add ~/.bashrc：export PATH=/home/cmake-3.21.0-linux-x86_64/bin:$PATH
 ```
 
-- compile_paddle.sh  
+- compile_paddle.sh --inference part 
+```
+p
+```
+
+- compile_paddle.sh --inference part 
 ```
 git clone https://github.com/PaddlePaddle/Paddle.git
 cd Paddle  
