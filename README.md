@@ -22,7 +22,13 @@ add ~/.bashrc：export PATH=/home/cmake-3.21.0-linux-x86_64/bin:$PATH
 
 - compile_paddle.sh --inference part 
 ```
-p
+python3 setup.py install
+find the package name of deepmd-kit in the location of installation and add in bashrc
+        export LD_LIBRARY_PATH=/usr/local/lib/python3.8/dist-packages/**{deepmd_name}**/deepmd/op:$LD_LIBRARY_PATH
+        export LIBRARY_PATH=/usr/local/lib/python3.8/dist-packages/**{deepmd_name}**/deepmd/op:$LIBRARY_PATH
+        export DEEP_MD_PATH=/usr/local/lib/python3.8/dist-packages/**{deepmd_name}**/deepmd/op
+source ~/.bashrc
+cd deepmd && python3 load_paddle_op.py install
 ```
 
 - compile_paddle.sh --inference part 
