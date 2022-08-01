@@ -34,6 +34,9 @@ PADDLE_ROOT=/home/Paddle/build/paddle_inference_install_dir(or add in bashrc wit
 ```
 - compile_Paddle_DeepMD-kit.sh --training part 
 ```
+cd /home
+git clone https://github.com/X4Science/paddle-deepmd.git
+cd /home/paddle-deepmd
 python3 -m pip install tensorflow-gpu==2.5.0
 python3 -m pip install scikit-build
 python3 setup.py install
@@ -47,7 +50,6 @@ cd deepmd && python3 load_paddle_op.py install
 
 - compile_Paddle_DeepMD-kit.sh --inference part 
 ```
-git clone https://github.com/X4Science/paddle-deepmd.git
 rm -rf /home/deepmdroot/ && mkdir /home/deepmdroot && DEEPMD_ROOT=/home/deepmdroot(or add in bashrc with export)
 cd /home/paddle-deepmd/source && rm -rf build && mkdir build && cd build
 cmake -DCMAKE_INSTALL_PREFIX=$DEEPMD_ROOT -DPADDLE_ROOT=$paddle_root -DUSE_CUDA_TOOLKIT=FALSE -DFLOAT_PREC=low ..
@@ -89,8 +91,8 @@ OMP_NUM_THREADS=1 TF_INTRA_OP_PARALLELISM_THREADS=1 TF_INTER_OP_PARALLELISM_THRE
 # 5.Future Plans
 - fix training precision
 - support Gromacs
-- support more descriptor and model
-- Support GPU
+- support more descriptor and fitting net model
+- support GPU trainning
 
 # 6.Cooperation
 Welcome to join us to develop this program together.  
