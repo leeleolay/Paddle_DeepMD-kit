@@ -76,8 +76,22 @@ make yes-kspace yes-user-deepmd
 #make serial -j 20
 make mpi -j 20
 ```
+# 4.Using Guide
+example: water
+training
+```
+cd /paddle_deepmd-kit_PATH/example/water/train/
+dp train water_se_a.json
+cp ./model.ckpt/model.pd* ../lmp/ -r
+cd ../lmp
+```
+inference
+```
+mpirun -np 10 lmp_mpi -in in.lammps
+```
 
-# 4.Performance
+
+# 5.Performance
 - The performance of inference based on the LAMMPS with PaddlePaddle framework，comparing with TensorFlow framework, about single core and multi-threads
 ![截屏2022-05-25 23 08 11](https://user-images.githubusercontent.com/50223303/170295703-32e18058-aff9-4368-93cd-38a1ed787e8a.png)
 - single thread performance
@@ -88,12 +102,12 @@ TF_INTRA_OP_PARALLELISM_THREADS=8 TF_INTER_OP_PARALLELISM_THREADS=1 numactl -c 0
 ```
 OMP_NUM_THREADS=1 TF_INTRA_OP_PARALLELISM_THREADS=1 TF_INTER_OP_PARALLELISM_THREADS=1  mpirun --allow-run-as-root -np 4 lmp_mpi -in in.lammps
 ```  
-# 5.Future Plans
+# 6.Future Plans
 - fix training precision
 - support Gromacs
 - support more descriptor and fitting net model
 - support GPU trainning
 
-# 6.Cooperation
+# 7.Cooperation
 Welcome to join us to develop this program together.  
 Please contact us from [X4Science](https://github.com/X4Science) [PaddlePaddle](https://www.paddlepaddle.org.cn) [PPSIG](https://www.paddlepaddle.org.cn/sig) [PaddleAIforScience](https://www.paddlepaddle.org.cn/science) [PaddleScience](https://github.com/PaddlePaddle/PaddleScience).
