@@ -78,14 +78,14 @@ make mpi -j 20
 ```
 # 4.Using Guide
 example: water
-training
+- training
 ```
 cd /paddle_deepmd-kit_PATH/example/water/train/
 dp train water_se_a.json
 cp ./model.ckpt/model.pd* ../lmp/ -r
 cd ../lmp
 ```
-inference
+- inference
 ```
 mpirun -np 10 lmp_mpi -in in.lammps
 ```
