@@ -39,7 +39,7 @@ cd /home
 git clone https://github.com/X4Science/paddle-deepmd.git
 cd /home/paddle-deepmd
 python3 -m pip install tensorflow-cpu==2.5.0
-# python3 -m pip install tensorflow-cpu==2.5.0
+# python3 -m pip install tensorflow-gpu==2.5.0
 python3 -m pip install scikit-build
 python3 setup.py install
 find the package name of deepmd-kit in the location of installation and add in bashrc
