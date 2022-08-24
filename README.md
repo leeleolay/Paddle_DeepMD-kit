@@ -77,6 +77,13 @@ cp -r /home/paddle-deepmd/source/build/USER-DEEPMD .
 make yes-kspace yes-user-deepmd
 #make serial -j 20
 make mpi -j 20
+add in bashrc by
+        export LD_LIBRARY_PATH=/home/Paddle/build/paddle_inference_install_dir/paddle/lib:$LD_LIBRARY_PATH
+        export LD_LIBRARY_PATH=/home/Paddle/build/paddle_inference_install_dir/third_party/install/mkldnn/lib:$LD_LIBRARY_PATH
+        export LD_LIBRARY_PATH=/home/Paddle/build/paddle_inference_install_dir/third_party/install/mklml/lib:$LD_LIBRARY_PATH
+        export LD_LIBRARY_PATH=/home/Paddle/build/paddle/fluid/pybind/:$LD_LIBRARY_PATH
+        export LD_LIBRARY_PATH=/home/deepmd-kit/source/build:$LD_LIBRARY_PATH
+source ~/.bashrc
 ```
 # 4.Using Guide
 example: water
