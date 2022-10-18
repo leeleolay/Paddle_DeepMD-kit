@@ -28,9 +28,12 @@ git reset --hard eca6638c599591c69fe40aa196f5fd42db7efbe2
 rm -rf build && mkdir build && cd build  
 cmake .. -DPY_VERSION=3.8 -DPYTHON_INCLUDE_DIR=$(python3 -c "from distutils.sysconfig import get_python_inc; print(get_python_inc())") -DPYTHON_LIBRARY=$(python3 -c "import distutils.sysconfig as sysconfig; print(sysconfig.get_config_var('LIBDIR'))") -DWITH_GPU=OFF -DWITH_AVX=ON -DON_INFER=ON -DCMAKE_BUILD_TYPE=Release  
 # cmake .. -DPY_VERSION=3.8 -DPYTHON_INCLUDE_DIR=$(python3 -c "from distutils.sysconfig import get_python_inc; print(get_python_inc())") -DPYTHON_LIBRARY=$(python3 -c "import distutils.sysconfig as sysconfig; print(sysconfig.get_config_var('LIBDIR'))") -DWITH_GPU=On -DWITH_AVX=ON -DON_INFER=ON -DCUDA_ARCH_NAME=Auto -DCMAKE_BUILD_TYPE=Release
+########################################################################
 ##git checkout e1e0deed64 #virified
 ##git checkout 23def39672 #need to be verifyied， newer version
 ##cmake .. -DCMAKE_BUILD_TYPE=Debug -DWITH_GPU=OFF -DWITH_AVX=ON -DWITH_MKLDNN=ON -DON_INFER=ON -DWITH_TESTING=OFF -DWITH_INFERENCE_API_TEST=OFF -DWITH_NCCL=OFF -DWITH_PYTHON=OFF -DWITH_LITE=OFF -DWITH_ONNXRUNTIME=OFF -DWITH_XBYAK=OFF -DWITH_RCCL=OFF -DWITH_CRYPTO=OFF
+##make -j`nproc` all
+##########################################################################
 make -j 32  
 make -j 32 inference_lib_dist  
 python3 -m pip install python/dist/paddlepaddle-0.0.0-cp38-cp38-linux_x86_64.whl --no-cache-dir
