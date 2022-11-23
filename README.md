@@ -111,7 +111,7 @@ mpirun -np 10 lmp_mpi -in in.lammps
 # 5.Performance
 - The performance of inference based on the LAMMPS with PaddlePaddle framework，comparing with TensorFlow framework, about single core and multi-threads
 
-test commands of Paddle
+- test commands of Paddle
 - serial computation(single process of LAMMPS with signle thread of deep learning framework)
 ```
 OMP_NUM_THREADS=1 numactl -c 0 -m 0 lmp_serial -in in.lammps
@@ -121,7 +121,7 @@ OMP_NUM_THREADS=1 numactl -c 0 -m 0 lmp_serial -in in.lammps
 OMP_NUM_THREADS=1 mpirun --allow-run-as-root -np 4 lmp_mpi -in in.lammps
 ```
 
-test commands of Tensorflow 
+- test commands of Tensorflow 
 - serial computation(single process of LAMMPS with signle thread of deep learning framework)
 ```
 TF_INTRA_OP_PARALLELISM_THREADS=1 TF_INTER_OP_PARALLELISM_THREADS=1 numactl -c 0 -m 0 lmp_serial -in in.lammps
@@ -131,7 +131,10 @@ TF_INTRA_OP_PARALLELISM_THREADS=1 TF_INTER_OP_PARALLELISM_THREADS=1 numactl -c 0
 ```
 TF_INTRA_OP_PARALLELISM_THREADS=1 TF_INTER_OP_PARALLELISM_THREADS=1  mpirun --allow-run-as-root -np 4 lmp_mpi -in in.lammps
 ``` 
-![截屏2022-05-25 23 08 11](https://user-images.githubusercontent.com/50223303/170295703-32e18058-aff9-4368-93cd-38a1ed787e8a.png)
+![图片1](https://user-images.githubusercontent.com/50223303/203568897-223a13f5-12bb-45b3-b790-384f37098f82.png)
+
+
+
 # 6.Future Plans
 - fix training precision
 - support Gromacs
