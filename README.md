@@ -129,12 +129,15 @@ TF_INTRA_OP_PARALLELISM_THREADS=1 TF_INTER_OP_PARALLELISM_THREADS=1  mpirun --al
 ![图片1](https://user-images.githubusercontent.com/50223303/203763299-871b66d1-d731-4ab0-ab3e-dba6d35b613b.png)
 The ordinate represents seconds
 
-The test of multiprocess with multithreads of TF on the Baidu internel machine with  
+The test of multiprocess with multithreads of TF on the Baidu internel machine with Intel(R) Xeon(R) Gold 6148 CPU @ 2.40GHz
 ```
 ## 6min53seconds
 TF_INTRA_OP_PARALLELISM_THREADS=1 TF_INTER_OP_PARALLELISM_THREADS=1  mpirun --allow-run-as-root -np 4 lmp_mpi -in in.lammps
 
-##
+## 
+TF_INTRA_OP_PARALLELISM_THREADS=4 TF_INTER_OP_PARALLELISM_THREADS=1  mpirun --allow-run-as-root -np 4 lmp_mpi -in in.lammps
+
+## 5min15seconds
 TF_INTRA_OP_PARALLELISM_THREADS=8 TF_INTER_OP_PARALLELISM_THREADS=1  mpirun --allow-run-as-root -np 4 lmp_mpi -in in.lammps
 
 ```
