@@ -137,7 +137,7 @@ TF_INTRA_OP_PARALLELISM_THREADS=1 TF_INTER_OP_PARALLELISM_THREADS=1  mpirun --al
 ## 3min49seconds
 TF_INTRA_OP_PARALLELISM_THREADS=4 TF_INTER_OP_PARALLELISM_THREADS=1  mpirun --allow-run-as-root -np 4 lmp_mpi -in in.lammps
 
-## 5min15seconds
+## No.1:5min15seconds  No.2:3min33seconds
 TF_INTRA_OP_PARALLELISM_THREADS=8 TF_INTER_OP_PARALLELISM_THREADS=1  mpirun --allow-run-as-root -np 4 lmp_mpi -in in.lammps
 
 ```
