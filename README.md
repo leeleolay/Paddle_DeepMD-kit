@@ -127,7 +127,7 @@ TF_INTRA_OP_PARALLELISM_THREADS=1 TF_INTER_OP_PARALLELISM_THREADS=1 numactl -c 0
 TF_INTRA_OP_PARALLELISM_THREADS=1 TF_INTER_OP_PARALLELISM_THREADS=1  mpirun --allow-run-as-root -np 4 lmp_mpi -in in.lammps
 ``` 
 ![图片1](https://user-images.githubusercontent.com/50223303/203763299-871b66d1-d731-4ab0-ab3e-dba6d35b613b.png)
-
+The ordinate represents seconds
 
 
 # 6.Future Plans
