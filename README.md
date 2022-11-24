@@ -114,7 +114,7 @@ The performance of inference based on the LAMMPS with PaddlePaddle framework，c
 - test commands of Paddle
 ```
 # serial computation(single process of LAMMPS with signle thread of deep learning framework)
-OMP_NUM_THREADS=1 numactl -c 0 -m 0 lmp_serial -in in.lammps
+OMP_NUM_THREADS=1 lmp_serial -in in.lammps
 # parallel computation（multiprocess of LAMMPS with single threads of deep learning framework）
 OMP_NUM_THREADS=1 mpirun --allow-run-as-root -np 4 lmp_mpi -in in.lammps
 ```
