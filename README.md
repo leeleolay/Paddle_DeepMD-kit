@@ -108,7 +108,7 @@ mpirun -np 10 lmp_mpi -in in.lammps
 ```
 
 
-# 5.Performance
+# 5.Latency
 The performance of inference based on the LAMMPS with PaddlePaddle framework，comparing with TensorFlow framework, about single core and multi-threads
 
 - test commands of Paddle
@@ -126,7 +126,9 @@ TF_INTRA_OP_PARALLELISM_THREADS=1 TF_INTER_OP_PARALLELISM_THREADS=1 numactl -c 0
 # parallel computation（multiprocess of LAMMPS with single thread of deep learning framework）
 TF_INTRA_OP_PARALLELISM_THREADS=1 TF_INTER_OP_PARALLELISM_THREADS=1  mpirun --allow-run-as-root -np 4 lmp_mpi -in in.lammps
 ``` 
-![图片1](https://user-images.githubusercontent.com/50223303/203570241-6690fbef-8b1c-4d2d-af1d-f240e7091420.jpg)
+![图片1](https://user-images.githubusercontent.com/50223303/203763299-871b66d1-d731-4ab0-ab3e-dba6d35b613b.png)
+
+
 
 # 6.Future Plans
 - fix training precision
