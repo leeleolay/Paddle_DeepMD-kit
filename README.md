@@ -143,12 +143,16 @@ TF_INTRA_OP_PARALLELISM_THREADS=8 TF_INTER_OP_PARALLELISM_THREADS=1  mpirun --al
 ### This is shared machine, I am not sure the cores of CPU only are occupied by my task
 ```
 
-# 6.Future Plans
-- fix training precision
-- support Gromacs
-- support more descriptor and fitting net model
+# 6.Architecture
+![图片2](/Pics/Paddle_DeemMD-kit.png)
+# 7.Future Plans
+- add&fix more descriptors using Paddle
+- add DeepTensor model and Dipole Polar net using Paddle
+- add custom ops used by DeepTensor model and descriptors using Paddle
+- fix Gromacs interface
 - support GPU trainning
+- support cluster inference
 
-# 7.Cooperation
+# 8.Cooperation
 Welcome to join us to develop this program together.  
 Please contact us from [X4Science](https://github.com/X4Science) [PaddlePaddle](https://www.paddlepaddle.org.cn) [PPSIG](https://www.paddlepaddle.org.cn/sig) [PaddleAIforScience](https://www.paddlepaddle.org.cn/science) [PaddleScience](https://github.com/PaddlePaddle/PaddleScience).
